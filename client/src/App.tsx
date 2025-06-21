@@ -6,6 +6,7 @@ import "./App.css"
 import HeaderCompo from "@/pages/components/Header";
 import FooterCompo from "@/pages/components/Footer";
 import ProfilePage from '@/pages/ProfilePage';
+import MedicalRecordForm from '@/pages/components/MedicalRecordForm';
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                 <Route path="/" element={<HeaderCompo/>} />
                 <Route path="/Aboutus" element={<AboutUs/>} />
                 <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/dossier-medical" element={<MedicalRecordForm/>} />
             </Routes>
         </ThemeProvider>
 
