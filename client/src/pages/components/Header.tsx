@@ -3,7 +3,7 @@ import { Heart, Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } fr
 import { Link } from 'react-router-dom';
 import ThemeToggle from "@/components/ThemeToggle";
 
-export default function FooterCompo() {
+export default function HeaderCompo() {
     return (
         <div className=" flex flex-col bg-gray-50">
 
@@ -50,7 +50,7 @@ export default function FooterCompo() {
                                 Login
                             </Button>
                             <Button className="bg-blue-600 hover:bg-blue-700 text-white">Register</Button>
-                                <ThemeToggle />
+                            <ThemeToggle />
                         </div>
 
                     </div>

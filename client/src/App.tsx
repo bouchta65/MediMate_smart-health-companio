@@ -1,16 +1,16 @@
 import { Routes, Route } from 'react-router-dom';
-import FooterCompo from "@/pages/components/footer";
 import AboutUs from "@/pages/AboutUs";
 
 import { ThemeProvider } from "./components/ThemeContext"
-import ThemeToggle from "./components/ThemeToggle"
 import "./App.css"
+import HeaderCompo from "@/pages/components/Header";
+import FooterCompo from "@/pages/components/Footer";
 
 function App() {
     return (
         <ThemeProvider>
             <Routes>
-                <Route path="/" element={<FooterCompo/>} />
+                <Route path="/" element={<HeaderCompo/>} />
                 <Route path="/Aboutus" element={<AboutUs/>} />
             </Routes>
         </ThemeProvider>
