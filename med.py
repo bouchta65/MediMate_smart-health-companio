@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 🩺 MediMate - AI Medical Consultation Backend API
-(Version 7: Definitive UTF-8 JSON Encoding Fix)
+(Version 8: Unified Chat Endpoint for Text & Audio)
 """
 
 # 1. Import Required Libraries
@@ -108,7 +108,6 @@ class LocalWhisper:
             raise RuntimeError("Whisper model is not available or failed to load.")
         logger.info(f"Transcribing '{audio_filepath}' with local model...")
         result = self.model.transcribe(audio_filepath, fp16=False)
-        # This log will show correct Arabic in your console, proving Whisper works fine
         logger.info(f"Transcription complete. Raw result: {result['text']}")
         return result["text"]
 
@@ -164,10 +163,8 @@ class MedicalConsultation:
         yield from self.ai_service.get_chat_completion(conversation, temperature=0.7, max_tokens=1500)
 
 class PDFExporter:
-    # This class remains the same as before. The issue was not here for the transcribe endpoint.
     @staticmethod
     def export_to_pdf(history: List[Tuple[str, str]], patient_type: str, is_emergency: bool) -> str:
-        # NOTE: For full PDF support, you still need the font fix from the previous answer.
         if not Config.ENABLE_PDF_EXPORT: raise RuntimeError("PDF export is disabled."); os.makedirs(Config.CONVERSATION_DIR, exist_ok=True); fd, filepath = tempfile.mkstemp(suffix=".pdf", prefix="MediMate_", dir=Config.CONVERSATION_DIR); os.close(fd); pdf = FPDF(); pdf.add_page(); pdf.set_font("Arial", "B", 16); pdf.cell(0, 10, "MediMate Medical Consultation Record", ln=True, align="C"); pdf.set_font("Arial", "", 12); pdf.cell(0, 10, f"Date: {datetime.now().strftime('%Y-%m-%d %H:%M')}", ln=True); pdf.cell(0, 10, f"Patient Profile: {patient_type.capitalize()}", ln=True)
         if is_emergency: pdf.set_text_color(255, 0, 0); pdf.cell(0, 10, "Status: Potential Emergency Flagged", ln=True); pdf.set_text_color(0, 0, 0)
         pdf.ln(10)
@@ -178,7 +175,6 @@ class PDFExporter:
 
 # 8. Flask API Implementation
 app = Flask(__name__)
-# THIS IS THE MOST IMPORTANT FIX: It tells Flask to send real UTF-8 characters in JSON.
 app.config['JSON_AS_ASCII'] = False
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
@@ -186,60 +182,128 @@ ai_service = AIService()
 local_whisper = LocalWhisper(model_name=Config.LOCAL_WHISPER_MODEL)
 consultation_manager = MedicalConsultation(ai_service)
 
-@app.route("/api/transcribe", methods=["POST"])
-def transcribe_audio():
-    if not local_whisper or not local_whisper.model: return jsonify({"error": "Local audio transcription service is not available."}), 503
-    if 'file' not in request.files: return jsonify({"error": "No file part in the request. Use key 'file'."}), 400
-    file = request.files['file'];
-    if file.filename == '': return jsonify({"error": "No selected file."}), 400
-    tmp_path = None
-    try:
-        suffix = os.path.splitext(file.filename)[1]
-        with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp_file: tmp_path = tmp_file.name; file.save(tmp_path)
-        transcribed_text = local_whisper.transcribe(tmp_path)
-        # Because of `app.config['JSON_AS_ASCII'] = False`, this now works correctly for Arabic.
-        return jsonify({"transcribed_text": transcribed_text})
-    except Exception as e:
-        logger.error(f"❌ Error during local audio processing: {e}", exc_info=True)
-        return jsonify({"error": f"Audio processing failed: {e}"}), 500
-    finally:
-        if tmp_path and os.path.exists(tmp_path):
-            try: os.remove(tmp_path); logger.info(f"🗑️ Cleaned up temporary audio file: {tmp_path}")
-            except Exception as e: logger.error(f"❌ Failed to clean up temporary file {tmp_path}: {e}")
 
-# ... other Flask routes (@app.route("/api/status"), etc.) ...
 @app.route("/api/status", methods=["GET"])
-def get_status(): return jsonify({"service_status": "running", "active_chat_method": ai_service.selected_method, "local_transcription_model": local_whisper.model_name if local_whisper.model else "Not Available"})
+def get_status():
+    return jsonify({
+        "service_status": "running",
+        "active_chat_method": ai_service.selected_method,
+        "local_transcription_model": local_whisper.model_name if local_whisper.model else "Not Available"
+    })
+
 
 @app.route("/api/chat", methods=["POST"])
-def chat():
-    if not ai_service.selected_method: return jsonify({"error": "No AI chat service is available."}), 503
-    data = request.get_json();
-    if not data or 'message' not in data: return jsonify({"error": "Request body must be JSON with a 'message' field."}), 400
-    message = data['message']; history = data.get('history', []); patient_type = data.get('patient_type', 'auto')
+def unified_chat():
+    """
+    Unified chat endpoint that accepts multipart/form-data.
+    It can process a user's query from either a text field or an audio file.
+
+    Form Fields:
+    - history (string): A JSON string representing the conversation history, e.g., '[["user msg", "ai reply"]]'.
+    - patient_type (string, optional): e.g., 'pediatric', 'chronic'. Defaults to 'auto'.
+    - message (string, optional): The user's text message.
+    - audio_file (file, optional): The user's audio message.
+
+    The endpoint prioritizes 'audio_file' over 'message' if both are provided.
+    """
+    if not ai_service.selected_method:
+        return jsonify({"error": "No AI chat service is available."}), 503
+
+    # --- 1. Extract form data ---
+    try:
+        history_str = request.form.get('history', '[]')
+        history = json.loads(history_str)
+        if not isinstance(history, list):
+            raise ValueError("History must be a JSON array of [user, assistant] pairs.")
+    except (json.JSONDecodeError, ValueError) as e:
+        logger.error(f"Invalid history format received: {history_str}")
+        return jsonify({"error": f"Invalid 'history' format. Must be a valid JSON array string. Error: {e}"}), 400
+
+    patient_type = request.form.get('patient_type', 'auto')
+    message = None
+
+    # --- 2. Process input: prioritize audio file ---
+    if 'audio_file' in request.files:
+        logger.info("🎙️ Received audio file for transcription and chat.")
+        file = request.files['audio_file']
+        if file.filename == '':
+            return jsonify({"error": "No audio file selected in 'audio_file' part."}), 400
+
+        if not local_whisper or not local_whisper.model:
+            return jsonify({"error": "Local audio transcription service is not available to process the file."}), 503
+
+        tmp_path = None
+        try:
+            suffix = os.path.splitext(file.filename)[1] or '.wav' # Ensure a suffix
+            with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp_file:
+                tmp_path = tmp_file.name
+                file.save(tmp_path)
+            message = local_whisper.transcribe(tmp_path)
+            logger.info(f"Transcription successful. Message: '{message}'")
+        except Exception as e:
+            logger.error(f"❌ Error during audio processing: {e}", exc_info=True)
+            return jsonify({"error": f"Audio processing failed: {e}"}), 500
+        finally:
+            if tmp_path and os.path.exists(tmp_path):
+                try:
+                    os.remove(tmp_path)
+                    logger.info(f"🗑️ Cleaned up temporary audio file: {tmp_path}")
+                except Exception as e:
+                    logger.error(f"❌ Failed to clean up temporary file {tmp_path}: {e}")
+
+    elif 'message' in request.form:
+        logger.info("💬 Received text message for chat.")
+        message = request.form['message']
+
+    # --- 3. Validate that we have a message ---
+    if message is None:
+        return jsonify({"error": "Request form must contain either a 'message' text field or an 'audio_file' part."}), 400
+
+    # --- 4. Generate and stream the chat response ---
     def generate_stream():
         try:
             for token in consultation_manager.process_user_message(message, history, patient_type):
-                # This also benefits from the fix, as json.dumps respects UTF-8 by default.
                 yield json.dumps({"token": token}) + '\n'
-        except Exception as e: logger.error(f"Error during stream generation: {e}"); yield json.dumps({"error": str(e)}) + '\n'
+        except Exception as e:
+            logger.error(f"Error during stream generation: {e}", exc_info=True)
+            yield json.dumps({"error": str(e)}) + '\n'
+
     return Response(stream_with_context(generate_stream()), mimetype="application/x-json-stream; charset=utf-8")
+
 
 @app.route("/api/export/pdf", methods=["POST"])
 def export_pdf():
-    if not Config.ENABLE_PDF_EXPORT: return jsonify({"error": "PDF export is disabled."}), 501
-    data = request.get_json();
-    if not data or 'history' not in data: return jsonify({"error": "Request must be JSON with 'history'."}), 400
+    if not Config.ENABLE_PDF_EXPORT:
+        return jsonify({"error": "PDF export is disabled."}), 501
+
+    data = request.get_json()
+    if not data or 'history' not in data:
+        return jsonify({"error": "Request must be JSON with 'history'."}), 400
+
     filepath = None
     try:
-        filepath = PDFExporter.export_to_pdf(data['history'], data.get('patient_type', 'standard'), data.get('is_emergency', False))
-        return send_file(filepath, as_attachment=True, download_name=f"MediMate_Consultation_{datetime.now().strftime('%Y%m%d')}.pdf", mimetype='application/pdf')
-    except Exception as e: logger.error(f"❌ Failed to generate or send PDF: {e}"); return jsonify({"error": f"Failed to export PDF: {e}"}), 500
+        filepath = PDFExporter.export_to_pdf(
+            data['history'],
+            data.get('patient_type', 'standard'),
+            data.get('is_emergency', False)
+        )
+        return send_file(
+            filepath,
+            as_attachment=True,
+            download_name=f"MediMate_Consultation_{datetime.now().strftime('%Y%m%d')}.pdf",
+            mimetype='application/pdf'
+        )
+    except Exception as e:
+        logger.error(f"❌ Failed to generate or send PDF: {e}")
+        return jsonify({"error": f"Failed to export PDF: {e}"}), 500
     finally:
-        if filepath and os.path.exists(filepath): os.remove(filepath)
+        if filepath and os.path.exists(filepath):
+            os.remove(filepath)
 
 # 9. Main Execution
 if __name__ == "__main__":
-    if not ai_service.selected_method: logger.error("="*60 + "\n❌ MediMate cannot start - No AI chat backend is available.\n" + "="*60); sys.exit(1)
+    if not ai_service.selected_method:
+        logger.error("="*60 + "\n❌ MediMate cannot start - No AI chat backend is available.\n" + "="*60)
+        sys.exit(1)
     logger.info("="*60 + f"\n👨‍⚕️ Dr. MediMate Backend is running on http://0.0.0.0:{Config.SERVER_PORT}\n" + "="*60)
     app.run(host="0.0.0.0", port=Config.SERVER_PORT, debug=False)
