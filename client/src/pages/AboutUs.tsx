@@ -3,7 +3,8 @@
 import type React from "react"
 import { Stethoscope, Shield, Brain, Lock, Server, Heart, CheckCircle, UserCheck } from "lucide-react"
 import { useTheme } from "@/components/ThemeContext"
-import FooterCompo from "@/pages/components/footer";
+import HeaderCompo from "@/pages/components/Header";
+import FooterCompo from "@/pages/components/Footer";
 
 const AboutUs: React.FC = () => {
   const { theme } = useTheme()
@@ -72,7 +73,7 @@ const AboutUs: React.FC = () => {
           : "bg-gradient-to-br from-white via-blue-50 to-white text-gray-900"
       }`}
     >
-      <FooterCompo/>
+      <HeaderCompo/>
       {/* Hero Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center">
@@ -308,6 +309,7 @@ const AboutUs: React.FC = () => {
           </button>
         </div>
       </section>
+      <FooterCompo/>
     </div>
   )
 }
