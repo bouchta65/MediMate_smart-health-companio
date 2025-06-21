@@ -3,8 +3,9 @@
 import type React from "react"
 import { Stethoscope, Shield, Brain, Lock, Server, Heart, CheckCircle, UserCheck } from "lucide-react"
 import { useTheme } from "../components/ThemeContext"
+import HeaderCompo from "@/pages/components/Header";
 
-const AboutUs: React.FC = () => {
+const HomePage: React.FC = () => {
     const { theme } = useTheme()
 
     const features = [
@@ -71,243 +72,77 @@ const AboutUs: React.FC = () => {
                     : "bg-gradient-to-br from-white via-blue-50 to-white text-gray-900"
             }`}
         >
+            <HeaderCompo/>
+
             {/* Hero Section */}
             <section className="relative py-20 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-7xl mx-auto text-center">
-                    <div
-                        className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium mb-8 ${
-                            theme === "dark"
-                                ? "bg-blue-900/50 text-blue-300 border border-blue-700"
-                                : "bg-blue-100 text-blue-700 border border-blue-200"
+                <div className="max-w-5xl mx-auto text-center">
+                    {/* Headline */}
+                    <h1
+                        className={`text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight ${
+                            theme === 'dark' ? 'text-white' : 'text-gray-900'
                         }`}
                     >
-                        <Stethoscope className="w-4 h-4 mr-2" />
-                        AI-Powered Medical Consultation
-                    </div>
-
-                    <h1 className={`text-5xl md:text-7xl font-bold mb-6 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
-                        Meet{" "}
-                        <span
-                            className={`${
-                                theme === "dark"
-                                    ? "bg-gradient-to-r from-blue-400 to-cyan-400"
-                                    : "bg-gradient-to-r from-blue-600 to-blue-500"
-                            } bg-clip-text text-transparent`}
-                        >
-              MediMate
-            </span>
+                        <span className="block">AI that builds AI for</span>
+                        <span className="block mt-2">
+        <span className={`${theme === 'dark' ? 'text-white' : 'text-black'}`}>Building </span>
+        <span className={`${theme === 'dark' ? 'text-cyan-400' : 'text-blue-600'}`}>Custom AI Agents</span>
+      </span>
                     </h1>
 
+                    {/* Subtext */}
                     <p
-                        className={`text-xl md:text-2xl mb-12 max-w-4xl mx-auto leading-relaxed ${
-                            theme === "dark" ? "text-gray-300" : "text-gray-600"
+                        className={`mt-6 text-lg ${
+                            theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
                         }`}
                     >
-                        Your advanced AI medical consultation system providing professional medical assessments, diagnoses, and
-                        treatment recommendations through an intuitive interface.
+                        Create fully customized AI agents for any task with just a few prompts
                     </p>
 
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <button
-                            className={`px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 ${
-                                theme === "dark"
-                                    ? "bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/25"
-                                    : "bg-blue-500 hover:bg-blue-600 text-white shadow-lg shadow-blue-500/25"
-                            }`}
-                        >
-                            Start Consultation
-                        </button>
-                        <button
-                            className={`px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 border-2 ${
-                                theme === "dark"
-                                    ? "border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-gray-900"
-                                    : "border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white"
-                            }`}
-                        >
-                            Learn More
-                        </button>
-                    </div>
-                </div>
-            </section>
-
-            {/* Key Features */}
-            <section className="py-20 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
-                            Key Features
-                        </h2>
-                        <p className={`text-xl max-w-3xl mx-auto ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
-                            Unlike basic health chatbots, MediMate acts as your personal AI physician with advanced capabilities.
-                        </p>
-                    </div>
-
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {features.map((feature, index) => (
-                            <div
-                                key={index}
-                                className={`p-8 rounded-2xl transition-all duration-300 hover:transform hover:scale-105 ${
-                                    theme === "dark"
-                                        ? "bg-gray-800/50 border border-gray-700 hover:border-blue-500"
-                                        : "bg-white border border-gray-200 hover:border-blue-300 shadow-lg"
-                                }`}
-                            >
-                                <div
-                                    className={`inline-flex p-3 rounded-xl mb-6 ${
-                                        theme === "dark" ? "bg-blue-900/50 text-blue-400" : "bg-blue-100 text-blue-600"
-                                    }`}
-                                >
-                                    {feature.icon}
-                                </div>
-                                <h3 className={`text-xl font-bold mb-4 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
-                                    {feature.title}
-                                </h3>
-                                <p className={`${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>{feature.description}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Use Cases */}
-            <section className={`py-20 px-4 sm:px-6 lg:px-8 ${theme === "dark" ? "bg-gray-800/30" : "bg-gray-50"}`}>
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
-                            Use Cases
-                        </h2>
-                    </div>
-
-                    <div className="grid lg:grid-cols-2 gap-12">
-                        {useCases.map((useCase, index) => (
-                            <div
-                                key={index}
-                                className={`p-8 rounded-2xl ${
-                                    theme === "dark"
-                                        ? "bg-gray-800/50 border border-gray-700"
-                                        : "bg-white border border-gray-200 shadow-lg"
-                                }`}
-                            >
-                                <div className="flex items-center mb-6">
-                                    <div
-                                        className={`p-3 rounded-xl mr-4 ${
-                                            theme === "dark" ? "bg-blue-900/50 text-blue-400" : "bg-blue-100 text-blue-600"
-                                        }`}
-                                    >
-                                        {useCase.icon}
-                                    </div>
-                                    <h3 className={`text-2xl font-bold ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
-                                        {useCase.category}
-                                    </h3>
-                                </div>
-                                <ul className="space-y-3">
-                                    {useCase.items.map((item, itemIndex) => (
-                                        <li key={itemIndex} className="flex items-start">
-                                            <CheckCircle
-                                                className={`w-5 h-5 mr-3 mt-0.5 flex-shrink-0 ${
-                                                    theme === "dark" ? "text-blue-400" : "text-blue-500"
-                                                }`}
-                                            />
-                                            <span className={`${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>{item}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Technical Specifications */}
-            <section className="py-20 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
-                            Technical Specifications
-                        </h2>
-                    </div>
-
-                    <div
-                        className={`rounded-2xl p-8 ${
-                            theme === "dark" ? "bg-gray-800/50 border border-gray-700" : "bg-white border border-gray-200 shadow-lg"
-                        }`}
+                    {/* Input form */}
+                    <form
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            // handle input submit here
+                        }}
+                        className="mt-10 flex justify-center items-center max-w-2xl mx-auto"
                     >
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {techSpecs.map((spec, index) => (
-                                <div key={index} className="flex justify-between items-center py-3">
-                  <span className={`font-semibold ${theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>
-                    {spec.label}
-                  </span>
-                                    <span className={`${theme === "dark" ? "text-blue-400" : "text-blue-600"} font-medium`}>
-                    {spec.value}
-                  </span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Security & Compliance */}
-            <section className={`py-20 px-4 sm:px-6 lg:px-8 ${theme === "dark" ? "bg-gray-800/30" : "bg-gray-50"}`}>
-                <div className="max-w-7xl mx-auto text-center">
-                    <div className="mb-12">
-                        <Lock className={`w-16 h-16 mx-auto mb-6 ${theme === "dark" ? "text-blue-400" : "text-blue-500"}`} />
-                        <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
-                            Security & Compliance
-                        </h2>
-                        <p className={`text-xl max-w-3xl mx-auto ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
-                            Your privacy and data security are our top priorities
-                        </p>
-                    </div>
-
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {[
-                            "Environment Variables - Secure API key management",
-                            "Local Processing - Complete data privacy option",
-                            "No Logging - Conversations are not stored",
-                            "HIPAA-Compliant - Healthcare-ready configuration",
-                        ].map((item, index) => (
-                            <div
-                                key={index}
-                                className={`p-6 rounded-xl ${
-                                    theme === "dark"
-                                        ? "bg-gray-800/50 border border-gray-700"
-                                        : "bg-white border border-gray-200 shadow-lg"
-                                }`}
+                        <input
+                            type="text"
+                            placeholder="What prompt do you want to create today?"
+                            className={`flex-1 px-5 py-4 rounded-l-xl border'bg-white text-gray-900 border-gray-300 placeholder-gray-500 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                        />
+                        <button
+                            type="submit"
+                            className={`p-4 rounded-r-xl transition ${
+                                theme === 'dark'
+                                    ? 'bg-white text-gray-900 hover:bg-gray-200'
+                                    : 'bg-black text-white hover:bg-gray-800'
+                            }`}
+                            title="Send"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
                             >
-                                <CheckCircle
-                                    className={`w-8 h-8 mx-auto mb-4 ${theme === "dark" ? "text-blue-400" : "text-blue-500"}`}
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M5 12h14M12 5l7 7-7 7"
                                 />
-                                <p className={`text-sm ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>{item}</p>
-                            </div>
-                        ))}
-                    </div>
+                            </svg>
+                        </button>
+                    </form>
                 </div>
             </section>
 
-            {/* CTA Section */}
-            <section className="py-20 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-4xl mx-auto text-center">
-                    <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
-                        Ready to Experience MediMate?
-                    </h2>
-                    <p className={`text-xl mb-12 ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
-                        Start your professional medical consultation today with our advanced AI physician.
-                    </p>
-                    <button
-                        className={`px-12 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 ${
-                            theme === "dark"
-                                ? "bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/25"
-                                : "bg-blue-500 hover:bg-blue-600 text-white shadow-lg shadow-blue-500/25"
-                        }`}
-                    >
-                        Launch MediMate
-                    </button>
-                </div>
-            </section>
+
         </div>
     )
 }
 
-export default AboutUs
+export default HomePage

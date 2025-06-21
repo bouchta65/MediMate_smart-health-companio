@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import AboutUs from "@/pages/AboutUs";
+import HomePage from "@/pages/Home";
 
 import { ThemeProvider } from "./components/ThemeContext"
 import "./App.css"
@@ -10,7 +11,7 @@ function App() {
     return (
         <ThemeProvider>
             <Routes>
-                <Route path="/" element={<HeaderCompo/>} />
+                <Route path="/" element={<HomePage />} />
                 <Route path="/Aboutus" element={<AboutUs/>} />
             </Routes>
         </ThemeProvider>
