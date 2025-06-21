@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { Heart, Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react"
+import { Heart, Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react'
 import { Link } from 'react-router-dom';
 import ThemeToggle from "@/components/ThemeToggle";
 
@@ -24,32 +24,38 @@ export default function HeaderCompo() {
 
                         {/* Navigation */}
                         <nav className="hidden md:flex items-center space-x-8">
-                            <Link href="/" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+                            <Link to="/" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
                                 Home
                             </Link>
-                            <Link href="/" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+                            <Link to="/" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
                                 Services
                             </Link>
-                            <Link href="/" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+                            <Link to="/" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
                                 Doctors
                             </Link>
-                            <Link href="/" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+                            <Link to="/aboutus" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
                                 About
                             </Link>
-                            <Link href="/" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+                            <Link to="/" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
                                 Contact
                             </Link>
                         </nav>
 
                         {/* Auth Buttons */}
                         <div className="flex items-center space-x-3">
-                            <Button
-                                variant="outline"
-                                className="bg-white text-blue-600 border-blue-200 hover:bg-blue-50 hover:text-blue-700"
-                            >
-                                Login
-                            </Button>
-                            <Button className="bg-blue-600 hover:bg-blue-700 text-white">Register</Button>
+                            <Link to="/login">
+                                <Button
+                                    variant="outline"
+                                    className="bg-white text-blue-600 border-blue-200 hover:bg-blue-50 hover:text-blue-700"
+                                >
+                                    Login
+                                </Button>
+                            </Link>
+                            <Link to="/register">
+                                <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+                                    Register
+                                </Button>
+                            </Link>
                             <ThemeToggle />
                         </div>
 
