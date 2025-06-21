@@ -1,10 +1,12 @@
 import { Button } from "@/components/ui/button"
 import { Heart, Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react"
 import { Link } from 'react-router-dom';
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function FooterCompo() {
     return (
-        <div className="min-h-screen flex flex-col bg-gray-50">
+        <div className=" flex flex-col bg-gray-50">
+
             {/* Header */}
             <header className="bg-white border-b border-blue-100 shadow-sm">
                 <div className="container mx-auto px-4 lg:px-6">
@@ -48,7 +50,9 @@ export default function FooterCompo() {
                                 Login
                             </Button>
                             <Button className="bg-blue-600 hover:bg-blue-700 text-white">Register</Button>
+                                <ThemeToggle />
                         </div>
+
                     </div>
                 </div>
             </header>
