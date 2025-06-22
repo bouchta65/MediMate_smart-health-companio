@@ -1,0 +1,84 @@
+2025-06-21 17:10:51,886 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:7861
+ * Running on http://192.168.8.142:7861
+2025-06-21 17:10:51,887 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-21 17:13:54,462 - MediMateAPI - INFO - ✅ Monkey-patch for whisper.audio.load_audio applied.
+2025-06-21 17:13:54,464 - MediMateAPI - INFO - 🔍 Checking AI service connections...
+2025-06-21 17:13:54,683 - MediMateAPI - INFO - ✅ OpenRouter client initialized.
+2025-06-21 17:13:56,755 - MediMateAPI - INFO - ✅ Ollama is accessible.
+2025-06-21 17:13:56,755 - MediMateAPI - INFO - 🎯 Using AI Method: OLLAMA
+2025-06-21 17:13:56,766 - MediMateAPI - INFO - 🎤 Loading local Whisper model 'base'...
+2025-06-21 17:13:57,591 - MediMateAPI - INFO - ✅ Local Whisper model loaded.
+2025-06-21 17:13:57,591 - MediMateAPI - INFO - 🩻 Loading MONAI DenseNet121 model for medical image analysis...
+2025-06-21 17:13:57,787 - MediMateAPI - INFO - ✅ MONAI model and transforms initialized.
+2025-06-21 17:13:57,789 - MediMateAPI - INFO - 🚀 Starting MediMate backend on http://0.0.0.0:7861
+2025-06-21 17:13:57,796 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:7861
+ * Running on http://192.168.8.142:7861
+2025-06-21 17:13:57,796 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-21 17:14:16,745 - werkzeug - INFO - 192.168.8.183 - - [21/Jun/2025 17:14:16] "[33mGET /api/status HTTP/1.1[0m" 404 -
+2025-06-21 17:14:16,765 - werkzeug - INFO - 192.168.8.183 - - [21/Jun/2025 17:14:16] "[33mGET /api/status HTTP/1.1[0m" 404 -
+2025-06-21 17:14:16,774 - werkzeug - INFO - 192.168.8.183 - - [21/Jun/2025 17:14:16] "[33mGET /api/status HTTP/1.1[0m" 404 -
+2025-06-21 17:14:46,146 - werkzeug - INFO - 192.168.8.142 - - [21/Jun/2025 17:14:46] "[33mPOST /api/chat HTTP/1.1[0m" 404 -
+2025-06-21 17:15:42,180 - werkzeug - INFO - 192.168.8.142 - - [21/Jun/2025 17:15:42] "[33mPOST /api/chat HTTP/1.1[0m" 404 -
+2025-06-21 17:15:56,580 - MediMateAPI - INFO - ✅ Monkey-patch for whisper.audio.load_audio applied.
+2025-06-21 17:15:56,582 - MediMateAPI - INFO - 🔍 Checking AI service connections...
+2025-06-21 17:15:56,794 - MediMateAPI - INFO - ✅ OpenRouter client initialized.
+2025-06-21 17:15:58,846 - MediMateAPI - INFO - ✅ Ollama is accessible.
+2025-06-21 17:15:58,846 - MediMateAPI - INFO - 🎯 Using AI Method: OLLAMA
+2025-06-21 17:15:58,846 - MediMateAPI - INFO - 🎤 Loading local Whisper model 'base'...
+2025-06-21 17:15:59,551 - MediMateAPI - INFO - ✅ Local Whisper model loaded.
+2025-06-21 17:15:59,551 - MediMateAPI - INFO - 🩻 Loading MONAI DenseNet121 model for medical image analysis...
+2025-06-21 17:15:59,694 - MediMateAPI - INFO - ✅ MONAI model and transforms initialized.
+2025-06-21 17:15:59,696 - MediMateAPI - INFO - 🚀 Starting MediMate backend on http://0.0.0.0:7861
+2025-06-21 17:15:59,704 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:7861
+ * Running on http://192.168.8.142:7861
+2025-06-21 17:15:59,704 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-21 17:16:02,828 - MediMateAPI - INFO - Transcribing 'C:\Users\ycode\AppData\Local\Temp\tmpz8fjnkpz.mp3'...
+2025-06-21 17:16:02,841 - MediMateAPI - INFO - Using ffmpeg executable at: C:\ProgramData\chocolatey\bin\ffmpeg.exe
+2025-06-21 17:16:04,444 - MediMateAPI - INFO - Transcription complete:  I have a headache and pain in stomach....
+2025-06-21 17:16:04,446 - MediMateAPI - INFO - Selected prompt: standard, Emergency: False
+2025-06-21 17:16:04,573 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 500 Internal Server Error"
+2025-06-21 17:16:04,574 - MediMateAPI - ERROR - ❌ Ollama error: model requires more system memory (9.5 GiB) than is available (9.1 GiB) (status code: 500)
+2025-06-21 17:16:04,574 - werkzeug - INFO - 192.168.8.142 - - [21/Jun/2025 17:16:04] "POST /api/chat HTTP/1.1" 200 -
+2025-06-21 17:16:19,670 - MediMateAPI - INFO - Transcribing 'C:\Users\ycode\AppData\Local\Temp\tmpfgyjyyzh.mp3'...
+2025-06-21 17:16:19,671 - MediMateAPI - INFO - Using ffmpeg executable at: C:\ProgramData\chocolatey\bin\ffmpeg.exe
+2025-06-21 17:16:20,949 - MediMateAPI - INFO - Transcription complete:  I have a headache and pain in stomach....
+2025-06-21 17:16:20,956 - MediMateAPI - INFO - Selected prompt: standard, Emergency: False
+2025-06-21 17:16:21,041 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 500 Internal Server Error"
+2025-06-21 17:16:21,042 - MediMateAPI - ERROR - ❌ Ollama error: model requires more system memory (9.5 GiB) than is available (9.0 GiB) (status code: 500)
+2025-06-21 17:16:21,042 - werkzeug - INFO - 192.168.8.142 - - [21/Jun/2025 17:16:21] "POST /api/chat HTTP/1.1" 200 -
+2025-06-21 17:16:27,756 - MediMateAPI - INFO - Transcribing 'C:\Users\ycode\AppData\Local\Temp\tmpz8whms9o.mp3'...
+2025-06-21 17:16:27,757 - MediMateAPI - INFO - Using ffmpeg executable at: C:\ProgramData\chocolatey\bin\ffmpeg.exe
+2025-06-21 17:16:29,012 - MediMateAPI - INFO - Transcription complete:  I have a headache and pain in stomach....
+2025-06-21 17:16:29,013 - MediMateAPI - INFO - Selected prompt: standard, Emergency: False
+2025-06-21 17:16:29,116 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 500 Internal Server Error"
+2025-06-21 17:16:29,117 - MediMateAPI - ERROR - ❌ Ollama error: model requires more system memory (9.5 GiB) than is available (8.7 GiB) (status code: 500)
+2025-06-21 17:16:29,117 - werkzeug - INFO - 192.168.8.142 - - [21/Jun/2025 17:16:29] "POST /api/chat HTTP/1.1" 200 -
+2025-06-21 17:16:31,301 - MediMateAPI - INFO - Transcribing 'C:\Users\ycode\AppData\Local\Temp\tmpgz5srvlf.mp3'...
+2025-06-21 17:16:31,302 - MediMateAPI - INFO - Using ffmpeg executable at: C:\ProgramData\chocolatey\bin\ffmpeg.exe
+2025-06-21 17:16:32,547 - MediMateAPI - INFO - Transcription complete:  I have a headache and pain in stomach....
+2025-06-21 17:16:32,548 - MediMateAPI - INFO - Selected prompt: standard, Emergency: False
+2025-06-21 17:16:32,646 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 500 Internal Server Error"
+2025-06-21 17:16:32,646 - MediMateAPI - ERROR - ❌ Ollama error: model requires more system memory (9.5 GiB) than is available (8.7 GiB) (status code: 500)
+2025-06-21 17:16:32,646 - werkzeug - INFO - 192.168.8.142 - - [21/Jun/2025 17:16:32] "POST /api/chat HTTP/1.1" 200 -
+2025-06-21 17:16:35,956 - MediMateAPI - INFO - Transcribing 'C:\Users\ycode\AppData\Local\Temp\tmptw_uq4f3.mp3'...
+2025-06-21 17:16:35,956 - MediMateAPI - INFO - Using ffmpeg executable at: C:\ProgramData\chocolatey\bin\ffmpeg.exe
+2025-06-21 17:16:37,211 - MediMateAPI - INFO - Transcription complete:  I have a headache and pain in stomach....
+2025-06-21 17:16:37,212 - MediMateAPI - INFO - Selected prompt: standard, Emergency: False
+2025-06-21 17:16:37,312 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 500 Internal Server Error"
+2025-06-21 17:16:37,312 - MediMateAPI - ERROR - ❌ Ollama error: model requires more system memory (9.5 GiB) than is available (8.8 GiB) (status code: 500)
+2025-06-21 17:16:37,312 - werkzeug - INFO - 192.168.8.142 - - [21/Jun/2025 17:16:37] "POST /api/chat HTTP/1.1" 200 -
+2025-06-21 17:16:49,863 - MediMateAPI - INFO - Transcribing 'C:\Users\ycode\AppData\Local\Temp\tmpcnsbd53l.mp3'...
+2025-06-21 17:16:49,863 - MediMateAPI - INFO - Using ffmpeg executable at: C:\ProgramData\chocolatey\bin\ffmpeg.exe
+2025-06-21 17:16:51,132 - MediMateAPI - INFO - Transcription complete:  I have a headache and pain in stomach....
+2025-06-21 17:16:51,133 - MediMateAPI - INFO - Selected prompt: standard, Emergency: False
+2025-06-21 17:18:28,523 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-06-21 17:18:28,556 - werkzeug - INFO - 192.168.8.142 - - [21/Jun/2025 17:18:28] "POST /api/chat HTTP/1.1" 200 -
+2025-06-21 17:28:47,184 - MediMateAPI - INFO - Selected prompt: general, Emergency: False
+2025-06-21 17:29:19,725 - MediMateAPI - INFO - Selected prompt: general, Emergency: False
+2025-06-21 17:29:57,862 - werkzeug - INFO - 192.168.8.183 - - [21/Jun/2025 17:29:57] "[31m[1mPOST /api/chat HTTP/1.1[0m" 400 -
