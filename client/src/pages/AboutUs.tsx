@@ -5,6 +5,7 @@ import { Stethoscope, Shield, Brain, Lock, Server, Heart, CheckCircle, UserCheck
 import { useTheme } from "@/components/ThemeContext"
 import HeaderCompo from "@/pages/components/Header";
 import FooterCompo from "@/pages/components/Footer";
+import {Link} from "react-router-dom";
 
 const AboutUs: React.FC = () => {
   const { theme } = useTheme()
@@ -298,7 +299,8 @@ const AboutUs: React.FC = () => {
           <p className={`text-xl mb-12 ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
             Start your professional medical consultation today with our advanced AI physician.
           </p>
-          <button
+          <Link
+              to={"/login"}
             className={`px-12 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 ${
               theme === "dark"
                 ? "bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/25"
@@ -306,7 +308,7 @@ const AboutUs: React.FC = () => {
             }`}
           >
             Launch MediMate
-          </button>
+          </Link>
         </div>
       </section>
       <FooterCompo/>

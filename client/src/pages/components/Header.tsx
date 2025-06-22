@@ -5,7 +5,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 
 export default function HeaderCompo() {
     return (
-        <div className=" flex flex-col bg-gray-50">
+        <div className=" w-full  flex flex-col bg-gray-50">
 
             {/* Header */}
             <header className="bg-white border-b border-blue-100 shadow-sm">
@@ -27,11 +27,8 @@ export default function HeaderCompo() {
                             <Link to="/" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
                                 Home
                             </Link>
-                            <Link to="/" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+                            <Link to="/services" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
                                 Services
-                            </Link>
-                            <Link to="/" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
-                                Doctors
                             </Link>
                             <Link to="/aboutus" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
                                 About

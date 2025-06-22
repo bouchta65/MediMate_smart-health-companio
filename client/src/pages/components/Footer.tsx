@@ -64,16 +64,16 @@ export default function FooterCompo() {
                             <div className="space-y-3">
                                 <div className="flex items-center space-x-3">
                                     <Phone className="h-4 w-4 text-blue-300" />
-                                    <span className="text-blue-200 text-sm">+1 (555) 123-4567</span>
+                                    <span className="text-blue-200 text-sm">+212 632773027</span>
                                 </div>
                                 <div className="flex items-center space-x-3">
                                     <Mail className="h-4 w-4 text-blue-300" />
-                                    <span className="text-blue-200 text-sm">info@medimate.com</span>
+                                    <span className="text-blue-200 text-sm">contact@medimate.com</span>
                                 </div>
                                 <div className="flex items-start space-x-3">
                                     <MapPin className="h-4 w-4 text-blue-300 mt-0.5" />
                                     <span className="text-blue-200 text-sm">
-                    123 Healthcare Ave
+                    Casablanca Place financier
                     <br />
                     Medical District, MD 12345
                   </span>
@@ -81,27 +81,7 @@ export default function FooterCompo() {
                             </div>
                         </div>
 
-                        {/* Services */}
-                        <div className="space-y-4">
-                            <h3 className="text-lg font-semibold">Our Services</h3>
-                            <ul className="space-y-2">
-                                <li>
-                                    <span className="text-blue-200 text-sm">General Medicine</span>
-                                </li>
-                                <li>
-                                    <span className="text-blue-200 text-sm">Cardiology</span>
-                                </li>
-                                <li>
-                                    <span className="text-blue-200 text-sm">Pediatrics</span>
-                                </li>
-                                <li>
-                                    <span className="text-blue-200 text-sm">Orthopedics</span>
-                                </li>
-                                <li>
-                                    <span className="text-blue-200 text-sm">Radiology</span>
-                                </li>
-                            </ul>
-                        </div>
+
                     </div>
 
                     {/* Bottom Section */}

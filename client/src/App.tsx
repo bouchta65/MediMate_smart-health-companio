@@ -7,6 +7,8 @@ import "./App.css"
 import HeaderCompo from "@/pages/components/Header";
 import AuthPage from "@/pages/AuthPage"
 import FooterCompo from "@/pages/components/Footer";
+import ChatPage from "@/pages/Chat";
+import ServicesPage from "@/pages/Services";
 
 function App() {
     return (
@@ -17,6 +19,8 @@ function App() {
                 <Route path="/auth" element={<AuthPage />} />
                 <Route path="/login" element={<AuthPage />} />
                 <Route path="/register" element={<AuthPage />} />
+                <Route path="/chat" element={<ChatPage />} />
+                <Route path="/services" element={<ServicesPage />} />
             </Routes>
         </ThemeProvider>
 
