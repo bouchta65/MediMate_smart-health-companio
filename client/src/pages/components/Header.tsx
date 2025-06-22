@@ -2,10 +2,17 @@ import { Button } from "@/components/ui/button"
 import { Heart, Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react'
 import { Link } from 'react-router-dom';
 import ThemeToggle from "@/components/ThemeToggle";
+import {useTheme} from "@/components/ThemeContext";
 
 export default function HeaderCompo() {
+    const { theme } = useTheme()
+
     return (
-        <div className=" w-full  flex flex-col bg-gray-50">
+        <div className={`transition-all duration-500 ease-in-out ${
+            theme === "dark"
+                ? "bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white"
+                : "bg-gradient-to-br from-gray-50 via-blue-50 to-gray-50 text-gray-900"
+        }`}>
 
             {/* Header */}
             <header className="bg-white border-b border-blue-100 shadow-sm">
@@ -32,9 +39,6 @@ export default function HeaderCompo() {
                             </Link>
                             <Link to="/aboutus" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
                                 About
-                            </Link>
-                            <Link to="/" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
-                                Contact
                             </Link>
                         </nav>
 

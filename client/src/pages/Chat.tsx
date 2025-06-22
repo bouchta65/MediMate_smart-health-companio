@@ -199,7 +199,12 @@ const ChatPage = () => {
     }, [messages, streamingContent]);
 
     return (
-        <div className={`flex flex-col min-h-screen transition-colors duration-300 ${theme === "dark" ? "bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white" : "bg-gradient-to-br from-white via-blue-50 to-white text-gray-900"}`}>
+        <div className={`min-h-screen transition-all duration-500 ease-in-out ${
+            theme === "dark"
+                ? "bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white"
+                : "bg-gradient-to-br from-gray-50 via-blue-50 to-gray-50 text-gray-900"
+        }`}
+        >
             <HeaderCompo />
 
             <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full px-4 py-6 space-y-6">
@@ -301,7 +306,11 @@ const ChatPage = () => {
                     <div ref={messagesEndRef} />
                 </div>
 
-                <div className="sticky bottom-0 pb-4 bg-[#f4f9ff]">
+                <div  className={`p-5 rounded-[10px] sticky bottom-0 pb-4 transition-all duration-500 ease-in-out ${
+                    theme === "dark"
+                        ? "bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white"
+                        : "bg-gradient-to-br from-gray-50 via-blue-50 to-gray-50 text-gray-900"
+                }`}>
                     <form onSubmit={handleSubmit} className="flex items-center gap-2">
                         {isRecording ? (
                             <button type="button" onClick={stopRecording} className={`p-3 rounded-xl transition ${theme === "dark" ? "bg-red-500 text-white hover:bg-red-600" : "bg-red-600 text-white hover:bg-red-700"}`} title="Stop Recording">

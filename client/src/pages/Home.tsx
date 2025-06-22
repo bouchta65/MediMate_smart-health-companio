@@ -2,7 +2,7 @@
 
 import React, {useState} from "react"
 import { Stethoscope, Shield, Brain, Lock, Server, Heart, CheckCircle, UserCheck } from "lucide-react"
-import { useTheme } from "../components/ThemeContext"
+import { useTheme } from "@/components/ThemeContext"
 import HeaderCompo from "@/pages/components/Header";
 import {useNavigate} from "react-router-dom";
 

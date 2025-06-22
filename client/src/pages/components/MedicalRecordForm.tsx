@@ -160,8 +160,10 @@ const MedicalRecordForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 p-4">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900">
+      <HeaderCompo/>
+
+      <div className="max-w-4xl py-20 mx-auto ">
         {/* Header */}
         <div>
              
@@ -589,7 +591,8 @@ const MedicalRecordForm = () => {
           </div>
         </div>
       </div>
-      
+      <FooterCompo/>
+
     </div>
   );
 };
