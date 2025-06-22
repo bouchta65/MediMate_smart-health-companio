@@ -9,6 +9,7 @@ import AuthPage from "@/pages/AuthPage"
 import FooterCompo from "@/pages/components/Footer";
 import ChatPage from "@/pages/Chat";
 import ServicesPage from "@/pages/Services";
+import ProfilePage from '@/pages/ProfilePage';
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                 <Route path="/register" element={<AuthPage />} />
                 <Route path="/chat" element={<ChatPage />} />
                 <Route path="/services" element={<ServicesPage />} />
+                <Route path="/profile" element={<ProfilePage />} />
             </Routes>
         </ThemeProvider>
 
