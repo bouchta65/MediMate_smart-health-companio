@@ -10,6 +10,7 @@ import FooterCompo from "@/pages/components/Footer";
 import ChatPage from "@/pages/Chat";
 import ServicesPage from "@/pages/Services";
 import ProfilePage from '@/pages/ProfilePage';
+import MedicalRecordForm from '@/pages/components/MedicalRecordForm';
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
                 <Route path="/chat" element={<ChatPage />} />
                 <Route path="/services" element={<ServicesPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/dossier-medical" element={<MedicalRecordForm/>} />
             </Routes>
         </ThemeProvider>
 
